@@ -4,10 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.example.pharmacy.AddDrugActivity
-import com.example.pharmacy.Constants
-import com.example.pharmacy.LoginActivity
-import com.example.pharmacy.RegisterActivity
+import com.example.pharmacy.*
 import com.example.pharmacy.models.Drug
 import com.example.pharmacy.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -99,6 +96,31 @@ class FirestoreClass {
                 Log.e(
                     activity.javaClass.simpleName,
                     "Error while getting user details.",
+                    e
+                )
+            }
+    }
+    fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
+        // Collection Name
+        mFireStore.collection(Constants.USERS)
+            // Document ID against which the data to be updated. Here the document id is the current logged in user id.
+            .document(getCurrentUserID())
+            // A HashMap of fields which are to be updated.
+            .update(userHashMap)
+            .addOnSuccessListener {
+
+                when (activity) {
+                    is ProfileActivity -> {
+                        // Call a function of base activity for transferring the result to it.
+                        activity.profileUpdateSuccess()
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while updating the user details.",
                     e
                 )
             }

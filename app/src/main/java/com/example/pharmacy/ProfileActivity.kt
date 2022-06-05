@@ -21,6 +21,8 @@ import java.io.IOException
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var mUserDetails: User
+    private var mSelectedImageFileUri: Uri? = null
+    private var mUserProfileImageURL: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,37 +83,19 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         saveBtn.setOnClickListener {
+
             if (validateUserProfileDetails(phone)) {
 
-                // Create a HashMap of user details to be updated in the database and add the values init.
-                val userHashMap = HashMap<String, Any>()
-
-                // Here we get the text from editText and trim the space
-                val mobileNumber = phone.text.toString().trim { it <= ' ' }
-
-                val sex = if (maleRb.isChecked) {
-                    Constants.MALE
-                } else if (femaleRb.isChecked){
-                    Constants.FEMALE
+                if (mSelectedImageFileUri != null) {
+                    FirestoreClass().uploadImageToCloudStorage(
+                        this@ProfileActivity,
+                        mSelectedImageFileUri
+                    )
                 } else {
-                    Constants.OTHER
+                    updateUserProfileDetails(maleRb, femaleRb, phone)
                 }
-
-                if (mobileNumber.isNotEmpty()) {
-                    userHashMap[Constants.MOBILE] = mobileNumber.toLong()
-                }
-
-                userHashMap[Constants.SEX] = sex
-
-                /*showErrorSnackBar("Your details are valid. You can update them.", false)*/
-
-                // call the registerUser function of FireStore class to make an entry in the database.
-                FirestoreClass().updateUserProfileData(
-                    this@ProfileActivity,
-                    userHashMap
-                )
-                // END
             }
+
         }
     }
 
@@ -160,9 +144,9 @@ class ProfileActivity : AppCompatActivity() {
                 if (data != null) {
                     try {
                         // The uri of selected image from phone storage.
-                        val selectedImageFileUri = data.data!!
+                        mSelectedImageFileUri = data.data!!
 
-                        photo.setImageURI(Uri.parse(selectedImageFileUri.toString()))
+                        photo.setImageURI(Uri.parse(mSelectedImageFileUri.toString()))
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(
@@ -196,6 +180,38 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun updateUserProfileDetails(male: RadioButton, female: RadioButton, phone: EditText) {
+
+        val userHashMap = HashMap<String, Any>()
+
+        val mobileNumber = phone.text.toString().trim { it <= ' ' }
+
+        val sex = if (male.isChecked) {
+            Constants.MALE
+        } else if (female.isChecked){
+            Constants.FEMALE
+        } else {
+            Constants.OTHER
+        }
+
+        if (mUserProfileImageURL.isNotEmpty()) {
+            userHashMap[Constants.IMAGE] = mUserProfileImageURL
+        }
+
+        if (mobileNumber.isNotEmpty()) {
+            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+        userHashMap[Constants.SEX] = sex
+
+        userHashMap[Constants.COMPLETE_PROFILE] = 1
+
+        FirestoreClass().updateUserProfileData(
+            this@ProfileActivity,
+            userHashMap
+        )
+    }
+
     fun profileUpdateSuccess() {
 
         Toast.makeText(
@@ -207,6 +223,13 @@ class ProfileActivity : AppCompatActivity() {
         // Redirect to the Main Screen after profile completion.
         startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
         finish()
+    }
+    fun imageUploadSuccess(imageURL: String) {
+        mUserProfileImageURL = imageURL
+        val phone = findViewById<EditText>(R.id.et_mobile_number)
+        val male = findViewById<RadioButton>(R.id.rb_male)
+        val female = findViewById<RadioButton>(R.id.rb_female)
+        updateUserProfileDetails(male, female, phone)
     }
 /*
     fun openSomeActivityForResult() {

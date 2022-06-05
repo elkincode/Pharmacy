@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.User
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthResult
@@ -18,10 +19,10 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        val email = findViewById<EditText>(R.id.et_email)
-        val pass = findViewById<EditText>(R.id.et_password)
         val firstName = findViewById<EditText>(R.id.et_first_name)
         val lastName = findViewById<EditText>(R.id.et_last_name)
+        val email = findViewById<EditText>(R.id.et_email)
+        val pass = findViewById<EditText>(R.id.et_password)
 
         val buttonLogin = findViewById<Button>(R.id.loginBtn)
         buttonLogin.setOnClickListener {
@@ -31,18 +32,19 @@ class RegisterActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.btn_register)
         registerButton.setOnClickListener {
-            registerUser(email, pass, firstName, lastName)
+            registerUser(firstName, lastName, email, pass)
         }
     }
 
-    private fun registerUser(email: EditText, firstName: EditText, lastName: EditText, pass: EditText) {
-            val emailText: String = email.text.toString().trim { it <= ' ' }
-            val passTest: String = pass.text.toString().trim { it <= ' ' }
+    private fun registerUser(firstName: EditText, lastName: EditText, email: EditText, pass: EditText) {
             val firstNameText: String = firstName.text.toString().trim { it <= ' ' }
             val lastNameText: String = lastName.text.toString().trim { it <= ' ' }
+            val emailText: String = email.text.toString().trim { it <= ' ' }
+            val passText: String = pass.text.toString().trim { it <= ' ' }
+
 
             // Create an instance and create a register a user with email and password.
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailText, passTest)
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailText, passText)
                 .addOnCompleteListener(
                     OnCompleteListener<AuthResult> { task ->
 
@@ -54,8 +56,12 @@ class RegisterActivity : AppCompatActivity() {
 
                             val user = User(
                                 firebaseUser.uid,
-
+                                firstNameText,
+                                lastNameText,
+                                emailText
                             )
+
+                            FirestoreClass().registerUser(this@RegisterActivity, user)
 
                             Toast.makeText(
                                 this@RegisterActivity,
@@ -63,9 +69,9 @@ class RegisterActivity : AppCompatActivity() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            FirebaseAuth.getInstance().signOut()
-                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                            finish()
+//                            FirebaseAuth.getInstance().signOut()
+//                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+//                            finish()
 
                         } else {
                             Toast.makeText(
@@ -76,5 +82,10 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     })
 
+    }
+    fun userRegistrationSuccess() {
+        FirebaseAuth.getInstance().signOut()
+        // Finish the Register Screen
+        finish()
     }
 }

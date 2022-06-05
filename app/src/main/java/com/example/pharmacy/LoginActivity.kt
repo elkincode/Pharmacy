@@ -3,9 +3,12 @@ package com.example.pharmacy
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.pharmacy.database.FirestoreClass
+import com.example.pharmacy.models.User
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
@@ -41,6 +44,8 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
 
                     if (task.isSuccessful) {
+                        FirestoreClass().getUserDetails(this@LoginActivity)
+
                         Toast.makeText(
                             this@LoginActivity,
                             "You are login successfully.",
@@ -54,5 +59,25 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+    }
+
+    fun userLoggedInSuccess(user: User) {
+
+        // Print the user details in the log as of now.
+        Log.i("First Name: ", user.firstName)
+        Log.i("Last Name: ", user.lastName)
+        Log.i("Email: ", user.email)
+
+        // Redirect the user to Main Screen after log in.
+        if (user.profileCompleted == 0) {
+            // If the user profile is incomplete then launch the UserProfileActivity.
+            val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
+            intent.putExtra(Constants.USER_DETAILS, user)
+            startActivity(intent)
+        } else {
+            // Redirect the user to Main Screen after log in.
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        }
+        finish()
     }
 }

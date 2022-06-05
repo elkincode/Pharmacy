@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Pharmacy">
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Pharmacy.NoActionBar" />
         <activity
             android:name=".SettingActivity"
             android:exported="false" />

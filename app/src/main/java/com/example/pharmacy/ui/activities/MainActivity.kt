@@ -1,11 +1,12 @@
-package com.example.pharmacy
+package com.example.pharmacy.ui.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.EditText
 import android.widget.TextView
+import com.example.pharmacy.Constants
+import com.example.pharmacy.R
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")

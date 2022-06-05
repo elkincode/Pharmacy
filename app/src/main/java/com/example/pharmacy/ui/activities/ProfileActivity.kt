@@ -1,4 +1,4 @@
-package com.example.pharmacy
+package com.example.pharmacy.ui.activities
 
 import android.Manifest
 import android.app.Activity
@@ -11,9 +11,10 @@ import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.pharmacy.Constants
+import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.User
 import java.io.IOException

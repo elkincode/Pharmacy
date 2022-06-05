@@ -6,8 +6,10 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import com.example.pharmacy.*
-import com.example.pharmacy.models.Drug
 import com.example.pharmacy.models.User
+import com.example.pharmacy.ui.activities.LoginActivity
+import com.example.pharmacy.ui.activities.ProfileActivity
+import com.example.pharmacy.ui.activities.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions

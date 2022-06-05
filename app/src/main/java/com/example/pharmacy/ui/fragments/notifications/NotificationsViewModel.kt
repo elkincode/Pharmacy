@@ -1,4 +1,4 @@
-package com.example.pharmacy.ui.notifications
+package com.example.pharmacy.ui.fragments.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/auth_screens_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button_background.xml" value="0.1" />
@@ -13,7 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_shop.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout-v23/activity_profile.xml" value="0.11574074074074074" />
-        <entry key="app/src/main/res/layout/activity_add_drug.xml" value="0.18181818181818182" />
+        <entry key="app/src/main/res/layout/activity_add_drug.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25606083524399903" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -27,6 +28,9 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_dashboard.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_list.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/add_drug_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/dashboard_menu.xml" value="0.1" />
       </map>

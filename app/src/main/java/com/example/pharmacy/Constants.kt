@@ -6,6 +6,7 @@ import android.webkit.MimeTypeMap
 
 object Constants {
     const val USERS: String = "users"
+    const val DRUGS: String = "drugs"
     const val PREF: String = "prefs"
     const val LOG_USER: String = "logusername"
     const val USER_DETAILS: String = "user_details"
@@ -17,8 +18,12 @@ object Constants {
     const val SEX: String = "sex"
     const val IMAGE: String = "image"
 
+    const val USER_ID: String = "user_id"
+
     const val PROFILE_IMAGE: String = "profile_image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
+
+    const val DRUG_IMAGE: String = "drug_image"
 
     fun getFileExtension(activity: Activity, uri: Uri?): String? {
         /*

@@ -5,11 +5,16 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.example.pharmacy.*
+import com.example.pharmacy.models.Drug
 import com.example.pharmacy.models.User
+import com.example.pharmacy.ui.activities.AddDrugActivity
 import com.example.pharmacy.ui.activities.LoginActivity
 import com.example.pharmacy.ui.activities.ProfileActivity
 import com.example.pharmacy.ui.activities.RegisterActivity
+import com.example.pharmacy.ui.fragments.DashboardFragment
+import com.example.pharmacy.ui.fragments.ProductsFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -131,11 +136,11 @@ class FirestoreClass {
             }
     }
 
-    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
+    fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?, imageType: String) {
 
         //getting the storage reference
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
-            Constants.PROFILE_IMAGE + System.currentTimeMillis() + "."
+            imageType + System.currentTimeMillis() + "."
                     + Constants.getFileExtension(
                 activity,
                 imageFileURI
@@ -156,8 +161,13 @@ class FirestoreClass {
                     .addOnSuccessListener { uri ->
                         Log.e("Downloadable Image URL", uri.toString())
 
-                           when (activity) {
+                        // Here call a function of base activity for transferring the result to it.
+                        when (activity) {
                             is ProfileActivity -> {
+                                activity.imageUploadSuccess(uri.toString())
+                            }
+
+                            is AddDrugActivity -> {
                                 activity.imageUploadSuccess(uri.toString())
                             }
                         }
@@ -165,12 +175,109 @@ class FirestoreClass {
             }
             .addOnFailureListener { exception ->
 
-
-
                 Log.e(
                     activity.javaClass.simpleName,
                     exception.message,
                     exception
+                )
+            }
+    }
+
+
+    fun uploadProductDetails(activity: AddDrugActivity, productInfo: Drug) {
+
+        mFireStore.collection(Constants.DRUGS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(productInfo, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.productUploadSuccess()
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while uploading the product details.",
+                    e
+                )
+            }
+    }
+
+    fun getProductsList(fragment: Fragment) {
+        // The collection name for PRODUCTS
+        mFireStore.collection(Constants.DRUGS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.e("Products List", document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val drugList: ArrayList<Drug> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val drug = i.toObject(Drug::class.java)
+                    drug!!.product_id = i.id
+
+                    drugList.add(drug)
+                }
+
+                when (fragment) {
+                    is ProductsFragment -> {
+                        fragment.successProductsListFromFireStore(drugList)
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("Get Product List", "Error while getting product list.", e)
+            }
+    }
+
+    fun getDashboardItemsList(fragment: DashboardFragment) {
+        // The collection name for PRODUCTS
+        mFireStore.collection(Constants.DRUGS)
+            .get() // Will get the documents snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the list of boards in the form of documents.
+                Log.e(fragment.javaClass.simpleName, document.documents.toString())
+
+                // Here we have created a new instance for Products ArrayList.
+                val productsList: ArrayList<Drug> = ArrayList()
+
+                // A for loop as per the list of documents to convert them into Products ArrayList.
+                for (i in document.documents) {
+
+                    val product = i.toObject(Drug::class.java)!!
+                    product.product_id = i.id
+                    productsList.add(product)
+                }
+
+                // Pass the success result to the base fragment.
+                fragment.successDashboardItemsList(productsList)
+            }
+            .addOnFailureListener { e ->
+                Log.e(fragment.javaClass.simpleName, "Error while getting dashboard items list.", e)
+            }
+    }
+
+    fun deleteProduct(fragment: ProductsFragment, productId: String) {
+        mFireStore.collection(Constants.DRUGS)
+            .document(productId)
+            .delete()
+            .addOnSuccessListener {
+                fragment.productDeleteSuccess()
+            }
+            .addOnFailureListener { e ->
+
+                Log.e(
+                    fragment.requireActivity().javaClass.simpleName,
+                    "Error while deleting the product.",
+                    e
                 )
             }
     }

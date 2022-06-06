@@ -29,6 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activities.AddDrugActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.Pharmacy.NoActionBar"
             android:exported="false" />
         <activity
             android:name=".ui.activities.RegisterActivity"
@@ -41,7 +43,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Pharmacy.NoActionBar" />
         <activity
-            android:name=".ui.activities.SplashActivity"
+            android:name=".ui.activities.LaunchScreenActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
             android:theme="@style/Theme.Pharmacy.NoActionBar">

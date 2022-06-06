@@ -35,7 +35,7 @@ class ProfileActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.et_email)
         val pass = findViewById<EditText>(R.id.et_password)
         val phone = findViewById<EditText>(R.id.et_mobile_number)
-        val saveBtn = findViewById<Button>(R.id.btn_submit)
+        val saveBtn = findViewById<Button>(R.id.btn_add_drug)
         val maleRb = findViewById<RadioButton>(R.id.rb_male)
         val femaleRb = findViewById<RadioButton>(R.id.rb_female)
         val otherRb = findViewById<RadioButton>(R.id.rb_other)
@@ -90,7 +90,8 @@ class ProfileActivity : AppCompatActivity() {
                 if (mSelectedImageFileUri != null) {
                     FirestoreClass().uploadImageToCloudStorage(
                         this@ProfileActivity,
-                        mSelectedImageFileUri
+                        mSelectedImageFileUri,
+                        Constants.PROFILE_IMAGE
                     )
                 } else {
                     updateUserProfileDetails(maleRb, femaleRb, phone)

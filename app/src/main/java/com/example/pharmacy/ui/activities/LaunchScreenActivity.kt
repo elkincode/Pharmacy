@@ -7,15 +7,15 @@ import android.os.Handler
 import com.example.pharmacy.R
 
 
-class SplashActivity : AppCompatActivity() {
+class LaunchScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_launch_screen)
 
         Handler().postDelayed(
             {
 
-                startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                startActivity(Intent(this@LaunchScreenActivity, LoginActivity::class.java))
                 finish()
             },
             2000

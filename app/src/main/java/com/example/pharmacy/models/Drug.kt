@@ -1,6 +1,13 @@
 package com.example.pharmacy.models
 
-data class Drug (
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+/**
+ * A data model class for Product with required fields.
+ */
+@Parcelize
+data class Drug(
     val user_id: String = "",
     val user_name: String = "",
     val title: String = "",
@@ -9,4 +16,4 @@ data class Drug (
     val stock_quantity: String = "",
     val image: String = "",
     var product_id: String = "",
-)
+) : Parcelable

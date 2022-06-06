@@ -9,12 +9,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.pharmacy.Constants
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Cart
 import com.example.pharmacy.models.Drug
+import java.lang.System.load
 
 class DrugDetailsActivity : AppCompatActivity() {
 
@@ -68,6 +70,8 @@ class DrugDetailsActivity : AppCompatActivity() {
         val description = findViewById<TextView>(R.id.tv_product_details_description)
         val quantity = findViewById<TextView>(R.id.tv_product_details_quantity)
         val imageView = findViewById<ImageView>(R.id.iv_product_detail_image)
+        val addBtn = findViewById<Button>(R.id.btn_add_to_cart)
+        val tv_product_details_stock_quantity = findViewById<TextView>(R.id.tv_product_details_stock_quantity)
 
         Glide
             .with(this@DrugDetailsActivity)
@@ -84,6 +88,30 @@ class DrugDetailsActivity : AppCompatActivity() {
             Log.e("Tes:", drug.user_id)
         } else {
             FirestoreClass().checkIfItemExistInCart(this@DrugDetailsActivity, mDrugId)
+        }
+
+        if(drug.stock_quantity.toInt() == 0){
+
+            // Hide the AddToCart button if the item is already in the cart.
+            addBtn.visibility = View.GONE
+
+            tv_product_details_stock_quantity.text =
+                resources.getString(R.string.lbl_out_of_stock)
+
+            tv_product_details_stock_quantity.setTextColor(
+                ContextCompat.getColor(
+                    this@DrugDetailsActivity,
+                    R.color.red
+                )
+            )
+        }else{
+
+            // There is no need to check the cart list if the product owner himself is seeing the product details.
+            if (FirestoreClass().getCurrentUserID() == drug.user_id) {
+                Log.e("Drug:", drug.user_id)
+            } else {
+                FirestoreClass().checkIfItemExistInCart(this@DrugDetailsActivity, mDrugId)
+            }
         }
     }
 

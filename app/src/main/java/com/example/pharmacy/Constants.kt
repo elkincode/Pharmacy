@@ -33,6 +33,8 @@ object Constants {
     const val CART_ITEMS: String = "cart_items"
     const val DRUG_ID: String = "product_id"
 
+    const val CART_QUANTITY: String = "cart_quantity"
+
     fun getFileExtension(activity: Activity, uri: Uri?): String? {
         /*
          * MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.

@@ -24,6 +24,14 @@ object Constants {
     const val COMPLETE_PROFILE: String = "profileCompleted"
 
     const val DRUG_IMAGE: String = "drug_image"
+    const val EXTRA_DRUG_ID: String = "extra_drug_id"
+
+    const val EXTRA_DRUG_OWNER_ID: String = "extra_drug_owner_id"
+
+    const val DEFAULT_CART_QUANTITY: String = "1"
+
+    const val CART_ITEMS: String = "cart_items"
+    const val DRUG_ID: String = "product_id"
 
     fun getFileExtension(activity: Activity, uri: Uri?): String? {
         /*

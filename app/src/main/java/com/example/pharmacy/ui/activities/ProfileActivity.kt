@@ -223,7 +223,7 @@ class ProfileActivity : AppCompatActivity() {
         ).show()
 
         // Redirect to the Main Screen after profile completion.
-        startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
+        startActivity(Intent(this@ProfileActivity, DashboardActivity::class.java))
         finish()
     }
     fun imageUploadSuccess(imageURL: String) {

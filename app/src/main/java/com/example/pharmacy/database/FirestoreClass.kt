@@ -7,12 +7,10 @@ import android.net.Uri
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.example.pharmacy.*
+import com.example.pharmacy.models.Cart
 import com.example.pharmacy.models.Drug
 import com.example.pharmacy.models.User
-import com.example.pharmacy.ui.activities.AddDrugActivity
-import com.example.pharmacy.ui.activities.LoginActivity
-import com.example.pharmacy.ui.activities.ProfileActivity
-import com.example.pharmacy.ui.activities.RegisterActivity
+import com.example.pharmacy.ui.activities.*
 import com.example.pharmacy.ui.fragments.DashboardFragment
 import com.example.pharmacy.ui.fragments.ProductsFragment
 import com.google.firebase.auth.FirebaseAuth
@@ -277,6 +275,74 @@ class FirestoreClass {
                 Log.e(
                     fragment.requireActivity().javaClass.simpleName,
                     "Error while deleting the product.",
+                    e
+                )
+            }
+    }
+
+    fun getProductDetails(activity: DrugDetailsActivity, productId: String) {
+
+        // The collection name for PRODUCTS
+        mFireStore.collection(Constants.DRUGS)
+            .document(productId)
+            .get() // Will get the document snapshots.
+            .addOnSuccessListener { document ->
+
+                // Here we get the product details in the form of document.
+                Log.e(activity.javaClass.simpleName, document.toString())
+
+                // Convert the snapshot to the object of Product data model class.
+                val product = document.toObject(Drug::class.java)!!
+
+                activity.productDetailsSuccess(product)
+
+            }
+            .addOnFailureListener { e ->
+
+
+                Log.e(activity.javaClass.simpleName, "Error while getting the product details.", e)
+            }
+    }
+
+    fun addCartItems(activity: DrugDetailsActivity, addToCart: Cart) {
+
+        mFireStore.collection(Constants.CART_ITEMS)
+            .document()
+            // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge
+            .set(addToCart, SetOptions.merge())
+            .addOnSuccessListener {
+
+                // Here call a function of base activity for transferring the result to it.
+                activity.addToCartSuccess()
+            }
+            .addOnFailureListener { e ->
+
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while creating the document for cart item.",
+                    e
+                )
+            }
+    }
+
+    fun checkIfItemExistInCart(activity: DrugDetailsActivity, productId: String) {
+
+        mFireStore.collection(Constants.CART_ITEMS)
+            .whereEqualTo(Constants.USER_ID, getCurrentUserID())
+            .whereEqualTo(Constants.DRUG_ID, productId)
+            .get()
+            .addOnSuccessListener { document ->
+
+                Log.e(activity.javaClass.simpleName, document.documents.toString())
+
+                if (document.documents.size > 0) {
+                    activity.productExistsInCart()
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while checking the existing cart list.",
                     e
                 )
             }

@@ -1,6 +1,8 @@
 package com.example.pharmacy.ui.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +11,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.pharmacy.Constants
 import com.example.pharmacy.R
 import com.example.pharmacy.models.Drug
+import com.example.pharmacy.ui.activities.DrugDetailsActivity
 import com.example.pharmacy.ui.fragments.ProductsFragment
 
 
@@ -45,10 +49,17 @@ open class DrugListAdapter (
 
             holder.itemView.findViewById<TextView>(R.id.tv_item_name).text = model.title
             holder.itemView.findViewById<TextView>(R.id.tv_item_price).text = "$${model.price}"
-            holder.itemView
+
 
             holder.itemView.findViewById<ImageButton>(R.id.ib_delete_product).setOnClickListener {
                 fragment.deleteProduct(model.product_id)
+            }
+
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, DrugDetailsActivity::class.java)
+                intent.putExtra(Constants.EXTRA_DRUG_ID, model.product_id)
+                intent.putExtra(Constants.EXTRA_DRUG_OWNER_ID, model.user_id)
+                context.startActivity(intent)
             }
         }
     }

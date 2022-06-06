@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pharmacy">
         <activity
+            android:name=".ui.activities.CartListActivity"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.Pharmacy.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.DrugDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.Pharmacy.NoActionBar" />
+        <activity
             android:name=".ui.activities.DashboardActivity"
             android:exported="false"
             android:label="@string/app_name" />
@@ -21,17 +31,17 @@
             android:theme="@style/Theme.Pharmacy.NoActionBar" />
         <activity
             android:name=".ui.activities.SettingsActivity"
+            android:exported="false"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.Pharmacy.NoActionBar"
-            android:exported="false" />
+            android:theme="@style/Theme.Pharmacy.NoActionBar" />
         <activity
             android:name=".ui.activities.MenuActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.AddDrugActivity"
+            android:exported="false"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.Pharmacy.NoActionBar"
-            android:exported="false" />
+            android:theme="@style/Theme.Pharmacy.NoActionBar" />
         <activity
             android:name=".ui.activities.RegisterActivity"
             android:exported="false"

@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pharmacy.Constants
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Drug
+import com.example.pharmacy.ui.activities.CartListActivity
+import com.example.pharmacy.ui.activities.DrugDetailsActivity
 import com.example.pharmacy.ui.activities.SettingsActivity
 import com.example.pharmacy.ui.adapters.DashboardListAdapter
 
@@ -50,6 +53,10 @@ class DashboardFragment : Fragment() {
                 startActivity(Intent(activity, SettingsActivity::class.java))
                 return true
             }
+            R.id.action_cart -> {
+                startActivity(Intent(activity, CartListActivity::class.java))
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -78,6 +85,17 @@ class DashboardFragment : Fragment() {
 
             val adapter = DashboardListAdapter(requireActivity(), dashboardItemsList)
             recyclerView.adapter = adapter
+
+            adapter.setOnClickListener(object :
+                DashboardListAdapter.OnClickListener {
+                override fun onClick(position: Int, product: Drug) {
+                    val intent = Intent(context, DrugDetailsActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_DRUG_ID, product.product_id)
+                    intent.putExtra(Constants.EXTRA_DRUG_OWNER_ID, product.user_id)
+                    startActivity(intent)
+                }
+            })
+
         } else {
             recyclerView.visibility = View.GONE
             tv.visibility = View.VISIBLE

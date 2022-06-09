@@ -3,95 +3,103 @@
     <string name="title_activity_login">LoginActivity</string>
 
     <string name="content_description">image</string>
-    <string name="title_login">Login</string>
-    <string name="et_hint_email_id">Email ID</string>
-    <string name="et_hint_password">Password</string>
+    <string name="title_login">Интернет-аптека</string>
+    <string name="et_hint_email_id">Email</string>
+    <string name="et_hint_password">Пароль</string>
     <string name="lbl_forgot_password">Forgot Password?</string>
-    <string name="btn_lbl_login">Login</string>
-    <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="register"><u>Register</u></string>
+    <string name="btn_lbl_login">Войти</string>
+    <string name="don_t_have_an_account">Нет аккаунта?</string>
+    <string name="register"><u>Регистрация</u></string>
 
-    <string name="create_an_account">CREATE AN ACCOUNT</string>
-    <string name="hint_last_name">Last name</string>
-    <string name="hint_first_name">First name</string>
-    <string name="et_hint_confirm_password">Confirm Password</string>
+    <string name="create_an_account">Создание аккаунта</string>
+    <string name="hint_last_name">Фамилия</string>
+    <string name="hint_first_name">Имя</string>
+    <string name="et_hint_confirm_password">Повторите пароль</string>
     <string name="i_agree_to_the_terms_and_condition">I Agree To The <u> Terms &amp; Condition </u></string>
-    <string name="btn_lbl_register">Register</string>
-    <string name="already_have_an_account">Already have an account?</string>
-    <string name="login"><u>Login</u></string>
+    <string name="btn_lbl_register">Регистрация</string>
+    <string name="already_have_an_account">Уже есть аккаунт?</string>
+    <string name="login"><u>Логин</u></string>
 
-    <string name="title_complete_profile">COMPLETE PROFILE</string>
-    <string name="et_hint_mobile_number">Mobile Number</string>
-    <string name="rb_lbl_male">MALE</string>
-    <string name="rb_lbl_female">FEMALE</string>
-    <string name="rb_lbl_other">NOT SPECIFY</string>/>
-    <string name="btn_lbl_save">Save</string>
+    <string name="title_complete_profile">Заполните профиль</string>
+    <string name="et_hint_mobile_number">Номер телефона</string>
+    <string name="rb_lbl_male">Мужской</string>
+    <string name="rb_lbl_female">Женский</string>
+    <string name="rb_lbl_other">Не указывать</string>/>
+    <string name="btn_lbl_save">Сохранить</string>
 
-    <string name="read_storage_permission_denied">Oops, you just denied the permission for storage. You can also allow it from settings.</string>
-    <string name="image_selection_failed">Image selection Failed!</string>
+    <string name="read_storage_permission_denied">Отсуствует разрешение на чтение.</string>
+    <string name="image_selection_failed">Ошибка добавления картинки.</string>
 
-    <string name="err_msg_enter_mobile_number">Please enter mobile number.</string>
-    <string name="msg_profile_update_success">Your profile is updated successfully.</string>
+    <string name="err_msg_enter_mobile_number">Введите номер телефона.</string>
+    <string name="msg_profile_update_success">Профиль обновлен.</string>
     <string name="title_activity_dashboard">DashboardActivity</string>
 
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_products">Products</string>
-    <string name="title_orders">Orders</string>
+    <string name="title_dashboard">Главная</string>
+    <string name="title_products">Управление</string>
+    <string name="title_orders">Заказы</string>
 
-    <string name="please_click_back_again_to_exit">Please click back again to exit.</string>
+    <string name="action_settings">Настройки</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="title_settings">Настройки</string>
+    <string name="lbl_edit">Изменить</string>
+    <string name="lbl_addresses">Адреса</string>
+    <string name="btn_lbl_logout">ВЫЙТИ</string>
 
-    <string name="title_settings">Setting</string>
-    <string name="lbl_edit">Edit</string>
-    <string name="lbl_addresses">Addresses</string>
-    <string name="btn_lbl_logout">Logout</string>
+    <string name="action_add_product">Добавить препарат</string>
 
-    <string name="action_add_product">Add Product</string>
+    <string name="title_add_product">Добавить препарат</string>
+    <string name="et_hint_product_title">Название препарата</string>
+    <string name="et_hint_product_price">Цена</string>
+    <string name="et_hint_product_description">Описание</string>
+    <string name="et_hint_product_quantity">Количество</string>
 
-    <string name="title_add_product">ADD PRODUCT</string>
-    <string name="et_hint_product_title">Product Title</string>
-    <string name="et_hint_product_price">Product Price ($)</string>
-    <string name="et_hint_product_description">Product Description</string>
-    <string name="et_hint_product_quantity">Product Quantity</string>
+    <string name="err_msg_select_product_image">Добавьте изображение.</string>
+    <string name="err_msg_enter_product_title">Добавьте название.</string>
+    <string name="err_msg_enter_product_price">Введите цену.</string>
+    <string name="err_msg_enter_product_description">Добавьте описание.</string>
+    <string name="err_msg_enter_product_quantity">Введите количество.</string>
 
-    <string name="err_msg_select_product_image">Please select product image.</string>
-    <string name="err_msg_enter_product_title">Please enter product title.</string>
-    <string name="err_msg_enter_product_price">Please enter product price.</string>
-    <string name="err_msg_enter_product_description">Please enter product description.</string>
-    <string name="err_msg_enter_product_quantity">Please enter product quantity.</string>
+    <string name="product_uploaded_success_message">Препарат добавлен.</string>
+    <string name="no_products_added_yet">Кажется, здесь ничего нет.</string>
+    <string name="no_dashboard_item_found">Кажется, здесь ничего нет.</string>
+    <string name="btn_lbl_submit">Готово</string>
 
-    <string name="product_uploaded_success_message">Your product is uploaded successfully.</string>
-    <string name="no_products_added_yet">No products added yet!</string>
-    <string name="no_dashboard_item_found">No items found!</string>
-    <string name="btn_lbl_submit">Submit</string>
+    <string name="product_delete_success_message">Препарат удален.</string>
+    <string name="delete_dialog_title">Удалить</string>
+    <string name="delete_dialog_message">Вы уверены?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 
-    <string name="product_delete_success_message">Your product is deleted successfully.</string>
-    <string name="delete_dialog_title">Delete</string>
-    <string name="delete_dialog_message">Are you sure you want to delete the product?</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="title_product_details">Сведения о препарате</string>
+    <string name="lbl_product_description">Описание</string>
+    <string name="lbl_product_details_stock_quantity">В наличии: </string>
 
-    <string name="title_product_details">PRODUCT DETAILS</string>
-    <string name="lbl_product_description">Product Description</string>
-    <string name="lbl_product_details_stock_quantity">Stock Quantity</string>
+    <string name="btn_lbl_add_to_cart">В корзину</string>
 
-    <string name="btn_lbl_add_to_cart">ADD TO CART</string>
+    <string name="success_message_item_added_to_cart">Препарат в корзине.</string>
 
-    <string name="success_message_item_added_to_cart">Product is added to your cart.</string>
+    <string name="btn_lbl_go_to_cart">К корзине</string>
 
-    <string name="btn_lbl_go_to_cart">GO TO CART</string>
+    <string name="title_my_cart">Корзина</string>
+    <string name="no_cart_item_found">Вы еще ничего не добавили.</string>
+    <string name="lbl_subtotal">Стоимость товаров</string>
+    <string name="lbl_shipping_charge">Стоимость доставки</string>
+    <string name="lbl_total_amount">К оплате</string>
+    <string name="btn_lbl_checkout">Подтвердить</string>
+    <string name="action_cart">Корзина</string>
 
-    <string name="title_my_cart">MY CART</string>
-    <string name="no_cart_item_found">No item found in cart!</string>
-    <string name="lbl_subtotal">Subtotal</string>
-    <string name="lbl_shipping_charge">Shipping Charge</string>
-    <string name="lbl_total_amount">Total Amount</string>
-    <string name="btn_lbl_checkout">Checkout</string>
-    <string name="action_cart">My Cart</string>
+    <string name="lbl_out_of_stock">Закончилось</string>
+    <string name="msg_item_removed_successfully">Успешно удалено.</string>
 
-    <string name="lbl_out_of_stock">OUT OF STOCK</string>
-    <string name="msg_item_removed_successfully">Item removed successfully.</string>
+    <string name="msg_for_available_stock">В наличии больше нет.</string>
 
-    <string name="msg_for_available_stock">Available stock is %1$s!. You can not add more than stock quantity.</string>
+    <string name="title_checkout">Оформление заказа</string>
+    <string name="checkout_lbl_product_items">Список препаратов</string>
+    <string name="checkout_lbl_selected_address">Адреса</string>
+    <string name="checkout_lbl_items_receipt">Items Receipt</string>
+    <string name="lbl_payment_mode">Способ оплаты</string>
+    <string name="lbl_cash_on_delivery">Доставка</string>
+    <string name="btn_lbl_place_order">Заказать</string>
+
+    <string name="no_orders_placed_yet">Кажется, вы еще ничего не заказывали</string>
 </resources>

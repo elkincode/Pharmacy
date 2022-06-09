@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Cart
@@ -21,9 +21,10 @@ import com.example.pharmacy.ui.activities.CartListActivity
 import com.example.pharmacy.ui.activities.DrugDetailsActivity
 
 
-open class CartListAdapter(
+class CartListAdapter(
     private val context: Context,
-    private var list: ArrayList<Cart>
+    private var list: ArrayList<Cart>,
+    private val updateCartItems: Boolean
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -52,19 +53,25 @@ open class CartListAdapter(
                 .into(imageView) // the view in which the image will be loaded.
 
             holder.itemView.findViewById<TextView>(R.id.tv_cart_item_title).text = model.title
-            holder.itemView.findViewById<TextView>(R.id.tv_cart_item_price).text = "$${model.price}"
+            holder.itemView.findViewById<TextView>(R.id.tv_cart_item_price).text = "${model.price} ₽"
             holder.itemView.findViewById<TextView>(R.id.tv_cart_quantity).text = model.cart_quantity
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, DrugDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_DRUG_ID, model.product_id)
-                intent.putExtra(Constants.EXTRA_DRUG_OWNER_ID, model.user_id)
+                intent.putExtra(Common.EXTRA_DRUG_ID, model.product_id)
+                intent.putExtra(Common.EXTRA_DRUG_OWNER_ID, model.user_id)
                 context.startActivity(intent)
             }
 
             if (model.cart_quantity == "0") {
                 holder.itemView.findViewById<ImageButton>(R.id.ib_remove_cart_item).visibility = View.GONE
                 holder.itemView.findViewById<ImageButton>(R.id.ib_add_cart_item).visibility = View.GONE
+
+                if (updateCartItems) {
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_delete_cart_item).visibility = View.VISIBLE
+                } else {
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_delete_cart_item).visibility = View.GONE
+                }
 
                 holder.itemView.findViewById<TextView>(R.id.tv_cart_quantity).text =
                     context.resources.getString(R.string.lbl_out_of_stock)
@@ -76,8 +83,16 @@ open class CartListAdapter(
                     )
                 )
             } else {
-                holder.itemView.findViewById<ImageButton>(R.id.ib_remove_cart_item).visibility = View.VISIBLE
-                holder.itemView.findViewById<ImageButton>(R.id.ib_add_cart_item).visibility = View.VISIBLE
+
+                if (updateCartItems) {
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_remove_cart_item).visibility = View.VISIBLE
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_add_cart_item).visibility = View.VISIBLE
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_delete_cart_item).visibility = View.VISIBLE
+                } else {
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_remove_cart_item).visibility = View.GONE
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_add_cart_item).visibility = View.GONE
+                    holder.itemView.findViewById<ImageButton>(R.id.ib_delete_cart_item).visibility = View.GONE
+                }
 
                 holder.itemView.findViewById<TextView>(R.id.tv_cart_quantity).setTextColor(
                     ContextCompat.getColor(
@@ -101,7 +116,7 @@ open class CartListAdapter(
 
                     val itemHashMap = HashMap<String, Any>()
 
-                    itemHashMap[Constants.CART_QUANTITY] = (cartQuantity - 1).toString()
+                    itemHashMap[Common.CART_QUANTITY] = (cartQuantity - 1).toString()
 
                     FirestoreClass().updateMyCart(context, model.id, itemHashMap)
                 }
@@ -115,7 +130,7 @@ open class CartListAdapter(
 
                     val itemHashMap = HashMap<String, Any>()
 
-                    itemHashMap[Constants.CART_QUANTITY] = (cartQuantity + 1).toString()
+                    itemHashMap[Common.CART_QUANTITY] = (cartQuantity + 1).toString()
 
 
                     FirestoreClass().updateMyCart(context, model.id, itemHashMap)
@@ -123,12 +138,11 @@ open class CartListAdapter(
                     if (context is CartListActivity) {
                         Toast.makeText(
                             this.context,
-                            context.resources.getString(R.string.msg_for_available_stock, model.stock_quantity),
+                            context.resources.getString(R.string.msg_for_available_stock),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
-                // END
             }
 
         }

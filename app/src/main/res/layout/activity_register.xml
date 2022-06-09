@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textSize="22sp"
+            android:fontFamily="@font/proxima_nova_bold"
             android:paddingEnd="0dp"
             android:text="@string/create_an_account"
             android:textColor="@color/black" />
@@ -132,6 +134,7 @@
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_confirm_password"
                 android:textColorHint="@color/blue"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_password">
@@ -143,29 +146,6 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_terms_and_condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_confirm_password">
-
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/cb_terms_and_condition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:checked="false" />
-
-                <TextView
-                    android:id="@+id/tv_terms_condition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/i_agree_to_the_terms_and_condition" />
-            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_register"
@@ -175,13 +155,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
-                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:hint="@string/btn_lbl_register"
                 android:textColor="@android:color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_terms_and_condition" />
+                app:layout_constraintTop_toBottomOf="@id/til_password" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -201,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Back"
+        android:text="Назад"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

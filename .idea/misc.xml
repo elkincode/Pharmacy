@@ -17,14 +17,15 @@
         <entry key="app/src/main/res/drawable/ic_shopping_basket.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_grey_border_background.xml" value="0.1" />
         <entry key="app/src/main/res/layout-v23/activity_profile.xml" value="0.11574074074074074" />
-        <entry key="app/src/main/res/layout/activity_add_drug.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_cart_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_drug.xml" value="0.26993865030674846" />
+        <entry key="app/src/main/res/layout/activity_cart_list.xml" value="0.22846441947565543" />
+        <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.10594315245478036" />
         <entry key="app/src/main/res/layout/activity_dashboard.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_drug_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25606083524399903" />
+        <entry key="app/src/main/res/layout/activity_drug_details.xml" value="0.35384615384615387" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.39690399169921875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.27610473632812504" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.1" />
@@ -33,8 +34,8 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_cart.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_dashboard.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_cart.xml" value="0.5616958618164063" />
+        <entry key="app/src/main/res/layout/item_dashboard.xml" value="0.2979583740234375" />
         <entry key="app/src/main/res/layout/item_list.xml" value="0.1" />
         <entry key="app/src/main/res/menu/add_drug_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />

@@ -3,6 +3,8 @@ package com.example.pharmacy.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -24,6 +26,7 @@ class RegisterActivity : AppCompatActivity() {
         val lastName = findViewById<EditText>(R.id.et_last_name)
         val email = findViewById<EditText>(R.id.et_email)
         val pass = findViewById<EditText>(R.id.et_password)
+        val conf = findViewById<EditText>(R.id.et_confirm_password)
 
         val buttonLogin = findViewById<Button>(R.id.loginBtn)
         buttonLogin.setOnClickListener {
@@ -33,60 +36,106 @@ class RegisterActivity : AppCompatActivity() {
 
         val registerButton = findViewById<Button>(R.id.btn_register)
         registerButton.setOnClickListener {
-            registerUser(firstName, lastName, email, pass)
+            registerUser(firstName, lastName, email, pass, conf)
         }
     }
 
-    private fun registerUser(firstName: EditText, lastName: EditText, email: EditText, pass: EditText) {
-            val firstNameText: String = firstName.text.toString().trim { it <= ' ' }
-            val lastNameText: String = lastName.text.toString().trim { it <= ' ' }
-            val emailText: String = email.text.toString().trim { it <= ' ' }
-            val passText: String = pass.text.toString().trim { it <= ' ' }
+    private fun registerUser(firstName: EditText, lastName: EditText, email: EditText, pass: EditText, conf: EditText) {
 
+            if (validateRegisterDetails(firstName, lastName, email, pass, conf)) {
 
-            // Create an instance and create a register a user with email and password.
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailText, passText)
-                .addOnCompleteListener(
-                    OnCompleteListener<AuthResult> { task ->
+                val firstNameText: String = firstName.text.toString().trim { it <= ' ' }
+                val lastNameText: String = lastName.text.toString().trim { it <= ' ' }
+                val emailText: String = email.text.toString().trim { it <= ' ' }
+                val passText: String = pass.text.toString().trim { it <= ' ' }
 
-                        // If the registration is successfully done
-                        if (task.isSuccessful) {
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(emailText, passText)
+                    .addOnCompleteListener(
+                        OnCompleteListener<AuthResult> { task ->
 
-                            // Firebase registered user
-                            val firebaseUser: FirebaseUser = task.result!!.user!!
+                            if (task.isSuccessful) {
 
-                            val user = User(
-                                firebaseUser.uid,
-                                firstNameText,
-                                lastNameText,
-                                emailText
-                            )
+                                val firebaseUser: FirebaseUser = task.result!!.user!!
 
-                            FirestoreClass().registerUser(this@RegisterActivity, user)
+                                val user = User(
+                                    firebaseUser.uid,
+                                    firstNameText,
+                                    lastNameText,
+                                    emailText
+                                )
 
-                            Toast.makeText(
-                                this@RegisterActivity,
-                                "You are registered successfully.  Your user id is ${firebaseUser.uid}",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                                FirestoreClass().registerUser(this@RegisterActivity, user)
+
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    "Успешная регистрация: ${firebaseUser.uid}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
 //                            FirebaseAuth.getInstance().signOut()
 //                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
 //                            finish()
 
-                        } else {
-                            Toast.makeText(
-                                this@RegisterActivity,
-                                task.exception!!.message.toString(),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    })
-
+                            } else {
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    task.exception!!.message.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        })
+            }
     }
+
+    private fun validateRegisterDetails(firstName: EditText, lastName: EditText, email: EditText, pass: EditText, conf: EditText): Boolean {
+        return when {
+            TextUtils.isEmpty(firstName.text.toString().trim { it <= ' ' }) -> {
+                Log.e("firstName: ", firstName.text.toString())
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Некорректное имя",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(lastName.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Некорректная фамилия",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(email.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Некорректный email",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+
+            TextUtils.isEmpty(pass.text.toString().trim { it <= ' ' }) -> {
+                Toast.makeText(
+                    this@RegisterActivity,
+                    "Некорректный пароль",
+                    Toast.LENGTH_SHORT
+                ).show()
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+
     fun userRegistrationSuccess() {
         FirebaseAuth.getInstance().signOut()
-        // Finish the Register Screen
+        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
         finish()
     }
 }

@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.User
@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
         val buttonRegister = findViewById<Button>(R.id.registerBtn)
 
         buttonLogin.setOnClickListener {
-            logInRegisteredUser(email, pass)
+            userLogin(email, pass)
         }
 
         buttonRegister.setOnClickListener {
@@ -34,14 +34,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun logInRegisteredUser(mail: EditText, pass: EditText) {
-
-
-            // Get the text from editText and trim the space
+    private fun userLogin(mail: EditText, pass: EditText) {
             val email = mail.text.toString().trim { it <= ' ' }
             val password = pass.text.toString().trim { it <= ' ' }
 
-            // Log-In using FirebaseAuth
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
 
@@ -50,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(
                             this@LoginActivity,
-                            "You are login successfully.",
+                            "Вы вошли в систему.",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
@@ -65,19 +61,15 @@ class LoginActivity : AppCompatActivity() {
 
     fun userLoggedInSuccess(user: User) {
 
-        // Print the user details in the log as of now.
         Log.i("First Name: ", user.firstName)
         Log.i("Last Name: ", user.lastName)
         Log.i("Email: ", user.email)
 
-        // Redirect the user to Main Screen after log in.
         if (user.profileCompleted == 0) {
-            // If the user profile is incomplete then launch the UserProfileActivity.
             val intent = Intent(this@LoginActivity, ProfileActivity::class.java)
-            intent.putExtra(Constants.USER_DETAILS, user)
+            intent.putExtra(Common.USER_DETAILS, user)
             startActivity(intent)
         } else {
-            // Redirect the user to Main Screen after log in.
             startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
         }
         finish()

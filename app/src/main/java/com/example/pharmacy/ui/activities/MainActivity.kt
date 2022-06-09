@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +17,9 @@ class MainActivity : AppCompatActivity() {
         val tv_main = findViewById<TextView>(R.id.tv_main)
 
         val sharedPreferences =
-            getSharedPreferences(Constants.PREF, Context.MODE_PRIVATE)
+            getSharedPreferences(Common.PREF, Context.MODE_PRIVATE)
 
-        val username = sharedPreferences.getString(Constants.LOG_USER, "")!!
+        val username = sharedPreferences.getString(Common.LOG_USER, "")!!
 
         tv_main.text= "The logged in user is $username."
 

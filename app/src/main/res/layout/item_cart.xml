@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/cart_item_marginTop"
-    android:background="@color/white"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/round_rect_shape"
     android:orientation="horizontal"
-    android:paddingStart="@dimen/cart_item_paddingStartEnd"
-    android:paddingTop="@dimen/cart_item_paddingTopBottom"
-    android:paddingEnd="@dimen/cart_item_paddingStartEnd"
-    android:paddingBottom="@dimen/cart_item_paddingTopBottom">
+    android:paddingStart="16dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="12dp">
 
     <LinearLayout
         android:id="@+id/ll_cart_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/blue"
-        android:padding="@dimen/cart_item_image_padding">
+        android:padding="2dp">
 
         <ImageView
             android:id="@+id/iv_cart_item_image"
-            android:layout_width="@dimen/cart_item_image_width"
-            android:layout_height="@dimen/cart_item_image_height"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
             android:background="@color/black_overlay"
             android:contentDescription="@string/content_description"
             android:scaleType="fitXY" />
@@ -32,8 +32,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginStart="@dimen/cart_item_details_marginStart"
-        android:layout_marginEnd="@dimen/cart_item_details_marginEnd"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="2dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="@dimen/cart_item_title_textSize"
+            android:textSize="16sp"
             tools:text="Cart Item Title" />
 
         <RelativeLayout
@@ -56,7 +56,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
-                android:textSize="@dimen/cart_item_price_textSize"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 tools:text="$100" />
 
@@ -64,8 +64,8 @@
                 android:id="@+id/ll_update_cart_quantity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/update_cart_quantity_marginStart"
-                android:layout_marginEnd="@dimen/update_cart_quantity_marginEnd"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="16dp"
                 android:layout_toEndOf="@id/tv_cart_item_price"
                 android:gravity="end"
                 android:orientation="horizontal">
@@ -74,8 +74,8 @@
                     android:id="@+id/ib_remove_cart_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/ib_remove_cart_item_marginStartEnd"
-                    android:layout_marginEnd="@dimen/ib_remove_cart_item_marginStartEnd"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/content_description"
                     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -87,12 +87,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/item_grey_border_background"
-                    android:paddingStart="@dimen/cart_quantity_paddingStartEnd"
-                    android:paddingTop="@dimen/cart_quantity_paddingTopBottom"
-                    android:paddingEnd="@dimen/cart_quantity_paddingStartEnd"
-                    android:paddingBottom="@dimen/cart_quantity_paddingTopBottom"
+                    android:paddingStart="16dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="3dp"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/cart_quantity_textSize"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     tools:text="1" />
 
@@ -100,8 +100,8 @@
                     android:id="@+id/ib_add_cart_item"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/ib_add_cart_item_marginStart"
-                    android:layout_marginEnd="@dimen/ib_add_cart_item_marginEnd"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/content_description"
                     android:foreground="?attr/selectableItemBackgroundBorderless"

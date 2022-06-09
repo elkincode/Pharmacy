@@ -3,12 +3,11 @@ package com.example.pharmacy.ui.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Drug
@@ -33,9 +32,6 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        /*dashboardViewModel =
-            ViewModelProviders.of(this).get(DashboardViewModel::class.java)*/
-
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
         return root
     }
@@ -47,12 +43,7 @@ class DashboardFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-
         when (id) {
-            R.id.action_settings -> {
-                startActivity(Intent(activity, SettingsActivity::class.java))
-                return true
-            }
             R.id.action_cart -> {
                 startActivity(Intent(activity, CartListActivity::class.java))
                 return true
@@ -70,7 +61,7 @@ class DashboardFragment : Fragment() {
         FirestoreClass().getDashboardItemsList(this@DashboardFragment)
     }
 
-    fun successDashboardItemsList(dashboardItemsList: ArrayList<Drug>) {
+    fun showDashboardItemsList(dashboardItemsList: ArrayList<Drug>) {
 
         recyclerView = requireView().findViewById(R.id.rv_dashboard_items)
         val tv : TextView = requireView().findViewById(R.id.tv_no_dashboard_items_found)
@@ -90,8 +81,8 @@ class DashboardFragment : Fragment() {
                 DashboardListAdapter.OnClickListener {
                 override fun onClick(position: Int, product: Drug) {
                     val intent = Intent(context, DrugDetailsActivity::class.java)
-                    intent.putExtra(Constants.EXTRA_DRUG_ID, product.product_id)
-                    intent.putExtra(Constants.EXTRA_DRUG_OWNER_ID, product.user_id)
+                    intent.putExtra(Common.EXTRA_DRUG_ID, product.product_id)
+                    intent.putExtra(Common.EXTRA_DRUG_OWNER_ID, product.user_id)
                     startActivity(intent)
                 }
             })

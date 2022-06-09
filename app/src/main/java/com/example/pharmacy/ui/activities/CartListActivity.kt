@@ -1,13 +1,10 @@
 package com.example.pharmacy.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toolbar
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacy.R
@@ -27,6 +24,13 @@ class CartListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cart_list)
 
         setupActionBar()
+
+        val btn_checkout = findViewById<Button>(R.id.btn_checkout)
+
+        btn_checkout.setOnClickListener {
+            val intent = Intent(this@CartListActivity, CheckoutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupActionBar() {
@@ -71,7 +75,7 @@ class CartListActivity : AppCompatActivity() {
             rvCart_list.layoutManager = LinearLayoutManager(this@CartListActivity)
             rvCart_list.setHasFixedSize(true)
 
-            val cartListAdapter = CartListAdapter(this@CartListActivity, mCartListItems)
+            val cartListAdapter = CartListAdapter(this@CartListActivity, mCartListItems, true)
             rvCart_list.adapter = cartListAdapter
 
             var subTotal: Double = 0.0
@@ -88,15 +92,15 @@ class CartListActivity : AppCompatActivity() {
                 }
             }
 
-            sub_total.text = "$$subTotal"
-            // Here we have kept Shipping Charge is fixed as $10 but in your case it may cary. Also, it depends on the location and total amount.
-            shipping_charge.text = "$10.0"
+            sub_total.text = "$subTotal ₽"
+
+            shipping_charge.text = "300 ₽"
 
             if (subTotal > 0) {
                 layout.visibility = View.VISIBLE
 
-                val total = subTotal + 10
-                total_amount.text = "$$total"
+                val total = subTotal + 300
+                total_amount.text = "$total ₽"
             } else {
                 layout.visibility = View.GONE
             }

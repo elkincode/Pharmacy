@@ -1,8 +1,8 @@
 package com.example.pharmacy.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 import com.example.pharmacy.models.Drug
 import com.example.pharmacy.ui.activities.DrugDetailsActivity
 import com.example.pharmacy.ui.fragments.ProductsFragment
 
 
-open class DrugListAdapter (
+class DrugListAdapter (
     private val context: Context,
     private var list: ArrayList<Drug>,
     private val fragment: ProductsFragment
@@ -34,21 +34,19 @@ open class DrugListAdapter (
         )
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = list[position]
-
         if (holder is MyViewHolder) {
-
             val imageView = holder.itemView.findViewById<ImageView>(R.id.iv_item_image)
-
             Glide
                 .with(context)
-                .load(model.image) // Uri or URL of the image
-                .centerCrop() // Scale type of the image.
-                .into(imageView) // the view in which the image will be loaded.
+                .load(model.image)
+                .centerCrop()
+                .into(imageView)
 
             holder.itemView.findViewById<TextView>(R.id.tv_item_name).text = model.title
-            holder.itemView.findViewById<TextView>(R.id.tv_item_price).text = "$${model.price}"
+            holder.itemView.findViewById<TextView>(R.id.tv_item_price).text = "${model.price} ₽"
 
 
             holder.itemView.findViewById<ImageButton>(R.id.ib_delete_product).setOnClickListener {
@@ -57,8 +55,8 @@ open class DrugListAdapter (
 
             holder.itemView.setOnClickListener {
                 val intent = Intent(context, DrugDetailsActivity::class.java)
-                intent.putExtra(Constants.EXTRA_DRUG_ID, model.product_id)
-                intent.putExtra(Constants.EXTRA_DRUG_OWNER_ID, model.user_id)
+                intent.putExtra(Common.EXTRA_DRUG_ID, model.product_id)
+                intent.putExtra(Common.EXTRA_DRUG_OWNER_ID, model.user_id)
                 context.startActivity(intent)
             }
         }

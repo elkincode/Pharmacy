@@ -4,7 +4,7 @@ import android.app.Activity
 import android.net.Uri
 import android.webkit.MimeTypeMap
 
-object Constants {
+object Common {
     const val USERS: String = "users"
     const val DRUGS: String = "drugs"
     const val PREF: String = "prefs"
@@ -35,16 +35,9 @@ object Constants {
 
     const val CART_QUANTITY: String = "cart_quantity"
 
+    const val ORDERS: String = "orders"
+
     fun getFileExtension(activity: Activity, uri: Uri?): String? {
-        /*
-         * MimeTypeMap: Two-way map that maps MIME-types to file extensions and vice versa.
-         *
-         * getSingleton(): Get the singleton instance of MimeTypeMap.
-         *
-         * getExtensionFromMimeType: Return the registered extension for the given MIME type.
-         *
-         * contentResolver.getType: Return the MIME type of the given content URL.
-         */
         return MimeTypeMap.getSingleton()
             .getExtensionFromMimeType(activity.contentResolver.getType(uri!!))
     }

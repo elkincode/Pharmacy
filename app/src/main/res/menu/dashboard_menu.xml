@@ -5,13 +5,6 @@
     <item
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_shopping_basket"
-        android:title="@string/action_settings"
+        android:title="@string/action_cart"
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/action_settings"
-        app:showAsAction="always" />
-
 </menu>

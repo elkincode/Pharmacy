@@ -3,17 +3,19 @@ package com.example.pharmacy.ui.fragments
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Drug
+import com.example.pharmacy.models.User
 import com.example.pharmacy.ui.activities.AddDrugActivity
+import com.example.pharmacy.ui.activities.SettingsActivity
 import com.example.pharmacy.ui.adapters.DrugListAdapter
 
 class ProductsFragment : Fragment() {
@@ -36,16 +38,20 @@ class ProductsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_drug_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+        val userRole = FirestoreClass().getUsersRole()
+        //Log.e("userRole", userRole.toString())
+        //if (userRole == 5) {
+            inflater.inflate(R.menu.add_drug_menu, menu)
+            super.onCreateOptionsMenu(menu, inflater)
+        //  }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
         when (id) {
-            R.id.action_add_product -> {
-                startActivity(Intent(activity, AddDrugActivity::class.java))
+            R.id.action_settings -> {
+                startActivity(Intent(activity, SettingsActivity::class.java))
                 return true
             }
         }
@@ -126,4 +132,5 @@ class ProductsFragment : Fragment() {
         alertDialog.setCancelable(false)
         alertDialog.show()
     }
+
 }

@@ -47,8 +47,8 @@
                 android:id="@+id/fl_user_image"
                 android:layout_width="@dimen/profile_user_image_size"
                 android:layout_height="@dimen/profile_user_image_size"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -222,6 +222,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_gender" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:text="Вы можете добавить \nфото профиля"
+                app:layout_constraintBottom_toBottomOf="@+id/fl_user_image"
+                app:layout_constraintStart_toEndOf="@+id/fl_user_image"
+                app:layout_constraintTop_toTopOf="@+id/fl_user_image" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

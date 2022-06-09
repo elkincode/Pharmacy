@@ -22,6 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
+        android:textSize="35dp"
+        android:fontFamily="@font/proxima_nova_bold"
         android:text="@string/title_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,17 +71,6 @@
             tools:text="123456" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:text="@string/lbl_forgot_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_password"
-        tools:visibility="invisible" />
-
     <Button
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
@@ -96,11 +87,12 @@
         app:layout_constraintTop_toBottomOf="@id/til_password" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="252dp"
-        android:layout_height="71dp"
+        android:layout_height="100dp"
         android:layout_marginTop="5dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_login">
@@ -110,6 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
             android:text="@string/don_t_have_an_account" />
 
         <Button
@@ -118,6 +111,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_horizontal"
             android:text="@string/register" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/tabletki" />
 </androidx.constraintlayout.widget.ConstraintLayout>

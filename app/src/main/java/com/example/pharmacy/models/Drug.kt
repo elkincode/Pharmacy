@@ -3,9 +3,6 @@ package com.example.pharmacy.models
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-/**
- * A data model class for Product with required fields.
- */
 @Parcelize
 data class Drug(
     val user_id: String = "",

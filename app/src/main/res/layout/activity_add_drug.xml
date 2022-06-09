@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/view_back"
     tools:context=".ui.activities.AddDrugActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -47,6 +48,9 @@
                 android:id="@+id/fl_product_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/add_product_header_image_height"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="130dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -55,27 +59,18 @@
                     android:id="@+id/iv_product_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/black_overlay"
+                    android:background="@drawable/round_rect_shape"
                     android:contentDescription="@string/content_description"
                     android:scaleType="fitXY" />
 
-                <ImageView
-                    android:id="@+id/iv_add_update_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:contentDescription="@string/content_description"
-                    android:foreground="?attr/selectableItemBackgroundBorderless"
-                    android:padding="@dimen/add_update_product_icon_padding"
-                    android:src="@drawable/ic_add_pic_drug" />
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_product_title"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:background="@color/view_back"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_product_title"
@@ -90,17 +85,18 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_padding"
-                    android:textColor="@color/blue"
+                    android:background="@drawable/round_rect_shape"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/et_textSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_product_price"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/view_back"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_product_price"
                 android:textColorHint="@color/black_overlay"
@@ -114,18 +110,19 @@
                     android:layout_height="wrap_content"
                     android:inputType="text"
                     android:padding="@dimen/et_padding"
-                    android:textColor="@color/blue"
+                    android:background="@drawable/round_rect_shape"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/et_textSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_product_description"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/view_back"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_product_description"
                 android:textColorHint="@color/black_overlay"
@@ -139,18 +136,19 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:minLines="3"
+                    android:background="@drawable/round_rect_shape"
                     android:padding="@dimen/et_padding"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/et_textSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_product_quantity"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:background="@color/view_back"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/et_hint_product_quantity"
                 android:textColorHint="@color/black_overlay"
@@ -164,7 +162,8 @@
                     android:layout_height="wrap_content"
                     android:inputType="number"
                     android:padding="@dimen/et_padding"
-                    android:textColor="@color/blue"
+                    android:background="@drawable/round_rect_shape"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/et_textSize" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,6 +189,37 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_product_quantity" />
 
+            <ImageView
+                android:id="@+id/iv_add_update_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="115dp"
+                android:contentDescription="@string/content_description"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="@dimen/add_update_product_icon_padding"
+                android:src="@drawable/ic_plus"
+                app:layout_constraintStart_toEndOf="@+id/fl_product_image"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/you_not_admin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Только для администратора."
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textColor="@color/black_overlay"
+        android:textSize="@dimen/no_data_found_textSize"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

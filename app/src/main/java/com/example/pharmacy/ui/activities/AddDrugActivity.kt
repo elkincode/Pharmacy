@@ -2,7 +2,6 @@ package com.example.pharmacy.ui.activities
 
 import android.Manifest
 import android.app.Activity
-import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,13 +11,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.pharmacy.Constants
+import com.example.pharmacy.Common
 import com.example.pharmacy.R
 import com.example.pharmacy.database.FirestoreClass
 import com.example.pharmacy.models.Drug
@@ -29,43 +25,65 @@ class AddDrugActivity : AppCompatActivity() {
 
     private var mSelectedImageFileUri: Uri? = null
     private var mProductImageURL: String = ""
+    var userRole = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_drug)
 
+        if (intent.hasExtra("role")) {
+            userRole = intent.getIntExtra("role", 0)
+            Log.e("userRole", userRole.toString())
+        }
+
         val addBtn = findViewById<Button>(R.id.btn_add_drug)
         val addPicBtn = findViewById<ImageView>(R.id.iv_add_update_product)
-        val photo = findViewById<ImageView>(R.id.iv_product_image)
         val title = findViewById<EditText>(R.id.et_product_title)
         val price = findViewById<EditText>(R.id.et_product_price)
         val description = findViewById<EditText>(R.id.et_product_description)
         val quantity = findViewById<EditText>(R.id.et_product_quantity)
+        val image = findViewById<ImageView>(R.id.iv_product_image)
+        val tvNotAdmin = findViewById<TextView>(R.id.you_not_admin)
 
-        addPicBtn.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                showImageChooser(this@AddDrugActivity)
-            } else {
-                /*Requests permissions to be granted to this application. These permissions
-                 must be requested in your manifest, they should not be granted to your app,
-                 and they should have protection level*/
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    2
-                )
+        if (userRole == 5) {
+            addPicBtn.setOnClickListener {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    )
+                    == PackageManager.PERMISSION_GRANTED
+                ) {
+                    showImageChooser(this@AddDrugActivity)
+                } else {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                        2
+                    )
+                }
             }
-        }
 
-        addBtn.setOnClickListener {
-            if (validateProductDetails(title, price, description, quantity)) {
-                uploadProductImage()
+            addBtn.setOnClickListener {
+                if (validateProductDetails(title, price, description, quantity)) {
+                    uploadProductImage()
+                }
             }
+        } else {
+            addPicBtn.visibility = android.view.View.GONE
+            addBtn.visibility = android.view.View.GONE
+            title.visibility = android.view.View.GONE
+            price.visibility = android.view.View.GONE
+            description.visibility = android.view.View.GONE
+            quantity.visibility = android.view.View.GONE
+            image.visibility = android.view.View.GONE
+
+            tvNotAdmin.visibility = android.view.View.VISIBLE
+
+            Toast.makeText(
+                this@AddDrugActivity,
+                "Только администратор может добавлять продукты.",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -76,11 +94,11 @@ class AddDrugActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 2) {
-            //If permission is granted
+
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showImageChooser(this@AddDrugActivity)
             } else {
-                //Displaying another toast if permission is not granted
+
                 Toast.makeText(
                     this,
                     resources.getString(R.string.read_storage_permission_denied),
@@ -91,7 +109,7 @@ class AddDrugActivity : AppCompatActivity() {
     }
 
     fun showImageChooser(activity: Activity) {
-        // An intent for launching the image selection of phone storage.
+
         val galleryIntent = Intent(
             Intent.ACTION_PICK,
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -109,7 +127,6 @@ class AddDrugActivity : AppCompatActivity() {
             if (requestCode == 2) {
                 if (data != null) {
 
-                    // Replace the add icon with edit icon once the image is selected.
                     icon.setImageDrawable(
                         ContextCompat.getDrawable(
                             this@AddDrugActivity,
@@ -131,7 +148,7 @@ class AddDrugActivity : AppCompatActivity() {
                 }
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            // A log is printed when user close or cancel the image selection.
+
             Log.e("Request Cancelled", "Image selection cancelled")
         }
     }
@@ -194,16 +211,12 @@ class AddDrugActivity : AppCompatActivity() {
         FirestoreClass().uploadImageToCloudStorage(
             this@AddDrugActivity,
             mSelectedImageFileUri,
-            Constants.DRUG_IMAGE
+            Common.DRUG_IMAGE
         )
     }
 
-    /**
-     * A function to get the successful result of product image upload.
-     */
     fun imageUploadSuccess(imageURL: String) {
 
-        // Initialize the global image url variable.
         mProductImageURL = imageURL
 
         uploadProductDetails()
@@ -216,12 +229,10 @@ class AddDrugActivity : AppCompatActivity() {
         val description = findViewById<EditText>(R.id.et_product_description)
         val quantity = findViewById<EditText>(R.id.et_product_quantity)
 
-        // Get the logged in username from the SharedPreferences that we have stored at a time of login.
         val username =
-            this.getSharedPreferences(Constants.PREF, Context.MODE_PRIVATE)
-                .getString(Constants.LOG_USER, "")!!
+            this.getSharedPreferences(Common.PREF, Context.MODE_PRIVATE)
+                .getString(Common.LOG_USER, "")!!
 
-        // Here we get the text from editText and trim the space
         val drug = Drug(
             FirestoreClass().getCurrentUserID(),
             username,
@@ -235,9 +246,6 @@ class AddDrugActivity : AppCompatActivity() {
         FirestoreClass().uploadProductDetails(this@AddDrugActivity, drug)
     }
 
-    /**
-     * A function to return the successful result of Product upload.
-     */
     fun productUploadSuccess() {
 
         Toast.makeText(

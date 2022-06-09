@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/view_back"
     tools:context=".ui.activities.CartListActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -34,7 +34,9 @@
         android:id="@+id/rv_cart_items_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="@dimen/rv_cart_items_marginTop"
+        android:layout_marginEnd="24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/ll_checkout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +151,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/button_background"
+            android:background="@color/blue"
             android:foreground="?attr/selectableItemBackground"
             android:gravity="center"
             android:paddingTop="@dimen/btn_padding"
@@ -158,8 +160,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/btn_textSize"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ll_terms_and_condition" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </LinearLayout>
 

@@ -14,7 +14,6 @@ class LaunchScreenActivity : AppCompatActivity() {
 
         Handler().postDelayed(
             {
-
                 startActivity(Intent(this@LaunchScreenActivity, LoginActivity::class.java))
                 finish()
             },

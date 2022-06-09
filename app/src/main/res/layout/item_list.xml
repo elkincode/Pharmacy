@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/item_list_marginTop"
-    android:background="@color/white"
+    android:layout_marginTop="16dp"
+    android:background="@drawable/round_rect_shape"
     android:orientation="vertical"
-    android:padding="@dimen/item_list_padding">
+    android:padding="10dp">
 
     <LinearLayout
         android:id="@+id/ll_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/black_overlay"
-        android:padding="@dimen/item_image_padding"
+        android:padding="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/iv_item_image"
-            android:layout_width="@dimen/item_image_width"
-            android:layout_height="@dimen/item_image_height"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
             android:contentDescription="@string/content_description"
             android:scaleType="fitXY" />
     </LinearLayout>
@@ -31,8 +31,8 @@
         android:id="@+id/ll_product_details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/item_image_title_price_marginStart"
-        android:layout_marginEnd="@dimen/item_image_title_price_marginStart"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,16 +46,16 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="@dimen/rv_item_name_textSize"
+            android:textSize="14sp"
             tools:text="Name" />
 
         <TextView
             android:id="@+id/tv_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/rv_item_price_marginTop"
+            android:layout_marginTop="2dp"
             android:textColor="@color/black"
-            android:textSize="@dimen/rv_item_price_textSize"
+            android:textSize="12sp"
             android:textStyle="bold"
             tools:text="$100.00" />
     </LinearLayout>
@@ -67,7 +67,9 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/content_description"
         android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/delete_icon_padding"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:padding="5dp"
         android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ll_product_details"
